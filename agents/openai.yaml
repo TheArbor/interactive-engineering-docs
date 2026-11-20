@@ -1,0 +1,4 @@
+interface:
+  display_name: "交互式工程文档"
+  short_description: "从需求或代码生成离线交互技术文档，也可反推规格与任务"
+  default_prompt: "用 $interactive-engineering-docs 把需求或当前实现整理为一份可交互、可验收的 HTML 技术文档。"

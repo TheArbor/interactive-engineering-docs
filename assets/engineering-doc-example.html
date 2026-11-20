@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>工程文档样页 · 资料审核</title><style>
+
+  :root {
+    color-scheme: light;
+    --ink: #162832;
+    --muted: #405661;
+    --line: #bacbd3;
+    --pale: #f0f5f7;
+    --blue: #145371;
+    --blue-bg: #eaf4f9;
+    --green: #185c47;
+    --green-bg: #e9f5ef;
+    --amber: #794814;
+    --amber-bg: #fff5e6;
+    --sans: "Microsoft YaHei UI", "PingFang SC", system-ui, sans-serif;
+    --mono: "Cascadia Mono", Consolas, ui-monospace, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: calc(var(--nav-height, 3.4rem) + 1rem); }
+  body { margin: 0; background: #fff; color: var(--ink); font: 15px/1.65 var(--sans); }
+  h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+  h1, h2, h3, h4 { line-height: 1.32; text-wrap: balance; }
+  h1 { font-size: clamp(1.85rem, 4vw, 2.8rem); }
+  h2 { font-size: clamp(1.38rem, 2.5vw, 1.85rem); }
+  h3 { font-size: 1.12rem; }
+  h4 { font-size: 1rem; }
+  p, li, td, th { overflow-wrap: anywhere; }
+  a { color: var(--blue); text-underline-offset: .19em; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  code, pre, .index { font-family: var(--mono); }
+  code { overflow-wrap: anywhere; }
+  .wrap { width: min(100% - 48px, 1280px); margin-inline: auto; }
+  .mast { display: grid; gap: .5rem; padding-block: 1.65rem 1.2rem; }
+  .metadata { color: var(--muted); font-size: .88rem; }
+  .status { display: inline-block; padding: .08rem .4rem; color: var(--amber); background: var(--amber-bg); border: 1px solid #dec69f; font-size: .78rem; font-weight: 700; }
+  .nav { position: sticky; top: 0; z-index: 3; background: #fff; border-block: 1px solid var(--line); }
+  .nav .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1rem; }
+  .nav-group { display: flex; align-items: center; gap: .65rem; padding-inline: .65rem; border-inline: 1px solid var(--line); }
+  .nav-role { font-size: .8rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .nav a { display: block; flex: none; padding: .67rem 0; text-decoration: none; font-weight: 700; font-size: .88rem; }
+  .nav a:hover { text-decoration: underline; }
+  .nav a:focus-visible { outline-offset: -2px; }
+  main { padding-bottom: 2.4rem; }
+  section { display: grid; gap: 1.25rem; padding-block: clamp(1.6rem, 4vw, 2.8rem); border-bottom: 1px solid var(--line); }
+  .section-head { display: grid; gap: .38rem; }
+  .section-head p, .source, figcaption, .figure-note { color: var(--muted); }
+  .source { font-size: .86rem; }
+  .source a + a { margin-left: .8rem; }
+  figure { display: grid; min-width: 0; gap: .65rem; }
+  figcaption, .figure-note { font-size: .87rem; }
+  figure > h3 + .figure-note { margin-top: -.28rem; }
+  .note { padding: .6rem .8rem; border: 1px solid var(--line); background: var(--pale); font-size: .9rem; }
+  .note.warn, .warn { border-color: #d6af74; background: var(--amber-bg); color: var(--amber); }
+  .note.ok, .ok { border-color: #a6c9b9; background: var(--green-bg); color: var(--green); }
+
+    :root { color-scheme:light; --bg:#fff; --paper:#fff; --ink:#162832; --muted:#405661; --line:#bacbd3; --accent:#145371; --tint:#f0f5f7; --good:#185c47; --warn:#794814; --bad:#9c3333; --focus:#145371; --blue:var(--accent); --pale:#f0f5f7; --mono:Consolas,ui-monospace,monospace; }
+    html { scroll-padding-top:4.4rem; }
+    body { font-size:15px; line-height:1.65; }
+    .shell { width:min(100% - 48px,1280px); margin-inline:auto; }
+    h1,h2 { font-family:inherit; letter-spacing:normal; line-height:1.32; }
+    h1 { font-size:clamp(1.85rem,4vw,2.8rem); }
+    h2 { font-size:clamp(1.38rem,2.5vw,1.85rem); }
+    .engineering-head { display:grid; gap:.45rem; padding-block:1.65rem 1.2rem; }
+    .engineering-head p { font-size:.87rem; color:var(--muted); }
+    .engineering-nav { position:sticky; top:0; z-index:3; background:var(--paper); border-block:1px solid var(--line); }
+    .engineering-nav .shell { display:flex; flex-wrap:wrap; gap:0 1.25rem; }
+    .engineering-nav a { padding:.62rem 0; font-size:.88rem; font-weight:700; text-decoration:none; }
+    .engineering-nav a:hover { text-decoration:underline; }
+    .layout { display:block; padding-block:0 2.4rem; }
+    main { gap:0; }
+    main>section { gap:1.1rem; padding-block:clamp(1.6rem,4vw,2.8rem); border-bottom:1px solid var(--line); }
+    .box,.table-scroll,.ledger details,.sources-list details,button,select,textarea { border-radius:0; }
+    .box { padding:.9rem; }
+    .flow li { border:1px solid var(--line); background:var(--pale); }
+    .flow li strong::before { content:none; }
+    figure { display:grid; gap:.6rem; min-width:0; }
+    .engineering-demo { padding:.8rem; border:1px solid var(--line); }
+    .demo-columns { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    .demo-pane { min-width:0; display:grid; align-content:start; gap:.5rem; padding:.65rem; border:1px solid var(--line); }
+    .demo-pane label { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; }
+    .demo-pane input[type="number"] { width:9rem; max-width:100%; padding:.38rem; font:inherit; border:1px solid var(--line); }
+    .demo-pane select { max-width:100%; }
+    .demo-slice { padding:.45rem .55rem; border:1px dashed var(--accent); background:#eaf4f9; }
+    .demo-slice + .demo-slice { background:#fff; }
+    .demo-slice p { color:var(--muted); font-size:.87rem; }
+    .mini-contract { min-width:0; }
+    .mini-contract td:first-child { width:8rem; }
+    @media(max-width:650px) {
+      html { scroll-padding-top:6.5rem; }
+      .shell { width:calc(100% - 24px); }
+      .engineering-nav .shell { gap:0 .75rem; }
+      .engineering-nav a { padding:.42rem 0; }
+      .demo-columns { grid-template-columns:1fr; }
+      .mini-contract td:first-child { width:5.4rem; }
+      .mini-contract th,.mini-contract td { padding:.48rem; }
+    }
+    @media print { .engineering-nav { display:none; } }
+  .d2-frame { min-width: 0; border: 1px solid var(--line); }
+  .d2-tools { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .36rem .65rem; min-height: 2.35rem; padding: .3rem .72rem; background: var(--pale); border-bottom: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+  .d2-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .36rem .6rem; }
+  .d2-controls[hidden] { display: none; }
+  .d2-stepper, .d2-presets { display: flex; align-items: center; gap: .35rem; }
+  .d2-controls button { min-height: 1.85rem; padding: .12rem .46rem; border: 1px solid var(--line); background: #fff; color: var(--blue); font: inherit; cursor: pointer; }
+  .d2-controls button:disabled { opacity: .48; cursor: default; }
+  .d2-stepper button { min-width: 1.85rem; }
+  .d2-stepper input { width: clamp(4.4rem, 13vw, 9rem); margin: 0; accent-color: var(--blue); }
+  .d2-percent { min-width: 3.2em; text-align: right; font-variant-numeric: tabular-nums; }
+  .d2-view { --d2-fit-limit: 1050px; display: block; overflow: auto; background: #fff; }
+  [data-diagram="retake"] .d2-view, [data-diagram="commit"] .d2-view { --d2-fit-limit: 760px; }
+  [data-diagram="sequence"] .d2-view { --d2-fit-limit: 810px; }
+  .d2-view:focus-visible { outline-offset: -3px; }
+  .d2-view img { display: block; margin-inline: auto; width: auto; max-width: min(100%, var(--d2-fit-limit)); height: auto; }
+  .d2-view.adjustable { max-height: min(68vh, 43rem); scrollbar-gutter: stable; }
+  .d2-view.adjustable img { max-width: none; }
+  .d2-source { border: 0; border-top: 1px solid var(--line); }
+  .d2-source summary { color: var(--blue); font-size: .86rem; }
+  .d2-source .source { margin-top: .5rem; }
+  .d2-source pre { white-space: pre; }
+  .d2-reference { padding-top: .9rem; }
+  @media print {
+    .d2-tools, .d2-source { display: none; }
+    .d2-view.adjustable { max-height: none; overflow: visible; }
+    .d2-view.adjustable img { width: auto !important; max-width: 100%; }
+  }
+
+figure,h4,table,thead,tbody,th,td {box-sizing:border-box} figure,h4 {margin:0} .hint,figcaption{color:var(--muted);font-size:.86rem} .notice{padding:.6rem;background:var(--pale);border:1px solid var(--line)} table{width:100%;border-collapse:collapse} th,td{border:1px solid var(--line);padding:.58rem;text-align:left} th{background:var(--pale)}
+  html { scroll-padding-top: calc(var(--guide-nav-height, 3.5rem) + .8rem); }
+  [hidden] { display: none !important; }
+  .engineering-nav .nav-links { align-items: center; }
+  .engineering-nav button, #sample-save { border: 1px solid var(--line); padding: .24rem .48rem; background: #fff; color: var(--blue); font: inherit; cursor: pointer; }
+  .engineering-nav button { font-size: .84rem; }
+  .engineering-nav button:disabled, #sample-save:disabled { opacity: .55; cursor: default; }
+  .engineering-nav .guide-bar { display: flex; flex-wrap: wrap; gap: .35rem .9rem; justify-content: space-between; align-items: center; padding-block: .38rem; border-top: 1px solid var(--line); background: var(--pale); }
+  .guide-actions { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .mind-map { display: grid; justify-items: center; padding: .8rem; border: 1px solid var(--line); }
+  .mind-root, .mind-branches a { display: grid; gap: .18rem; padding: .52rem .68rem; border: 1px solid var(--line); }
+  .mind-root { position: relative; background: var(--blue-bg); text-align: center; }
+  .mind-root::after { content: ""; position: absolute; left: 50%; top: 100%; height: .8rem; border-left: 1px solid var(--blue); }
+  .mind-map span { color: var(--muted); font-size: .85rem; }
+  .mind-branches { position: relative; display: grid; width: 100%; padding: .8rem 0 0; grid-template-columns: repeat(4, minmax(0, 1fr)); list-style: none; gap: .6rem; margin-top: .8rem; }
+  .mind-branches::before { content: ""; position: absolute; top: 0; inset-inline: calc((100% - 1.8rem) / 8); border-top: 1px solid var(--blue); }
+  .mind-branches li { position: relative; }
+  .mind-branches li::before { content: ""; position: absolute; left: 50%; top: -.8rem; height: .8rem; border-left: 1px solid var(--blue); }
+  .mind-branches a { height: 100%; text-decoration: none; }
+  .mind-branches a:hover strong { text-decoration: underline; }
+  .feature-list { display: grid; gap: .38rem; margin: 0; }
+  .feature-list div { display: grid; grid-template-columns: minmax(7.5rem, .25fr) minmax(0, 1fr); padding: .45rem .6rem; border: 1px solid var(--line); }
+  .feature-list dt { font-weight: 700; }
+  .feature-list dd { margin: 0; }
+  .table-scroll { overflow: auto; }
+  .contract { border: 1px solid var(--line); padding: .55rem; }
+  .contract summary { cursor: pointer; color: var(--blue); }
+  .contract p { margin-top: .45rem; }
+  .build-order { display: grid; gap: .5rem; padding-inline-start: 1.5rem; }
+  #sample-save { justify-self: start; }
+  @media(max-width:650px) {
+    .mind-map { justify-items: stretch; }
+    .mind-root { justify-self: start; }
+    .mind-root::after, .mind-branches::before { display: none; }
+    .mind-branches { grid-template-columns: 1fr; border-left: 1px solid var(--blue); padding: 0 0 0 .75rem; margin-left: .45rem; width: auto; }
+    .mind-branches li::before { top: 50%; left: -.75rem; height: 0; width: .75rem; border-top: 1px solid var(--blue); }
+    .feature-list div { grid-template-columns: 1fr; }
+    .table-scroll table { min-width: 26rem; }
+  }
+
+  .mind-map { position: relative; display: grid; min-height: 20rem; padding: .8rem; grid-template-areas: ". scope ." "evidence center operation" ". delivery ."; grid-template-columns: repeat(3,minmax(0, 1fr)); grid-template-rows: repeat(3,minmax(0,1fr)); gap: .65rem; align-items: center; justify-items: stretch; }
+  .mind-lines { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-width: 2; pointer-events: none; }
+  .mind-root { grid-area: center; justify-self: center; justify-items: center; align-self: center; width: min(100%, 11rem); z-index: 1; }
+  .mind-map .mind-root::after, .mind-map .mind-branches::before, .mind-map .mind-branches li::before { display: none; }
+  .mind-branches { display: contents; }
+  .mind-branches li { z-index: 1; min-width: 0; width: min(100%, 15rem); justify-self: center; }
+  .mind-branches li:nth-child(1) { grid-area: scope; border-top: 3px solid #145371; }
+  .mind-branches li:nth-child(2) { grid-area: evidence; border-top: 3px solid #185c47; }
+  .mind-branches li:nth-child(3) { grid-area: operation; border-top: 3px solid #794814; }
+  .mind-branches li:nth-child(4) { grid-area: delivery; border-top: 3px solid #52628b; }
+  .mind-branches a { background: #fff; }
+  .relation-viewport { overflow: auto; border: 1px solid var(--line); }
+  .relation-map { display: block; width: min(100%, 740px); min-width: 565px; height: auto; margin-inline: auto; font: 17px var(--sans); }
+  .reason-chart { display: grid; justify-items: center; gap: 1rem; padding: .75rem; border: 1px solid var(--line); }
+  .reason-root { position: relative; padding: .5rem .75rem; border: 1px solid var(--line); background: var(--blue-bg); text-align: center; }
+  .reason-root::after { content: ""; position: absolute; left: 50%; top: 100%; height: .55rem; border-left: 1px solid var(--blue); }
+  .reason-branches { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; width: 100%; padding: .45rem 0 0; list-style: none; }
+  .reason-branches::before { content: ""; position: absolute; top: -.45rem; inset-inline: calc((100% - 1.1rem) / 6); border-top: 1px solid var(--blue); }
+  .reason-branches li { position: relative; display: grid; align-content: start; gap: .25rem; padding: .48rem .6rem; border: 1px solid var(--line); }
+  .reason-branches li::before { content: ""; position: absolute; left: 50%; top: -.9rem; height: .9rem; border-left: 1px solid var(--blue); }
+  .reason-branches span, .reason-branches a { font-size: .87rem; }
+  @media(max-width:650px) {
+    .mind-map { min-height: 0; grid-template-columns: minmax(0, 1fr); grid-template-areas: "center" "scope" "evidence" "operation" "delivery"; grid-template-rows: auto; gap: .45rem; }
+    .mind-lines { display: none; }
+    .mind-root { justify-self: stretch; justify-items: start; width: auto; }
+    .mind-branches li { margin-inline-start: .9rem; width: auto; justify-self: stretch; }
+    .mind-map .mind-branches li::before { display: block; width: .7rem; height: 0; top: 50%; left: -.75rem; }
+    .reason-chart { justify-items: stretch; gap: .55rem; }
+    .reason-root::after, .reason-branches::before { display: none; }
+    .reason-branches { grid-template-columns: 1fr; border-left: 1px solid var(--blue); padding: 0 0 0 .65rem; }
+    .reason-branches li::before { top: 50%; left: -.65rem; width: .65rem; height: 0; border-top: 1px solid var(--blue); }
+  }
+
+  .choice-chart .reason-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .choice-chart .reason-branches::before { inset-inline: calc((100% - .55rem) / 4); }
+  .decision-note { padding: .52rem .65rem; border: 1px solid var(--line); background: var(--pale); }
+  .decision-note p { font-size: .88rem; }
+  [data-current="true"] { background: var(--blue-bg); border-color: var(--blue); }
+  #design-dialogue select { font: inherit; }
+  @media(max-width:650px) {
+    .choice-chart .reason-branches { grid-template-columns: 1fr; }
+  }
+</style></head><body>
+
+  <header class="shell engineering-head">
+    <h1>资料审核技术方案</h1>
+    <p>方案样例 · 让审核员从候选资料页定位正文，确认后留下可追溯的审核记录。</p>
+  </header>
+  <nav class="engineering-nav" aria-label="章节导航">
+    <div class="shell nav-links">
+      <a href="#overview">总览</a><a href="#briefing">汇报</a><a href="#requirements">需求</a><a href="#design-dialogue">研究决策</a><a href="#boundary">架构</a><a href="#review">操作</a><a href="#implementation">实施</a><a href="#accept">验收</a>
+      <button id="guide-start" type="button" aria-controls="guide-bar" aria-expanded="false" hidden>顺序讲解</button>
+    </div>
+    <div id="guide-bar" class="shell guide-bar" aria-label="讲解控制" hidden>
+      <p id="guide-step" aria-live="polite"></p>
+      <div class="guide-actions">
+        <button id="guide-prev" type="button">上一项</button><button id="guide-next" type="button">下一项</button><button id="guide-exit" type="button">退出讲解</button>
+      </div>
+    </div>
+  </nav>
+  <main class="shell">
+    <section id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">项目思维导图</h2>
+      <figure aria-labelledby="map-caption">
+        <div class="mind-map">
+
+          <svg class="mind-lines" viewBox="0 0 1000 320" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M500 160 C500 115 455 100 500 48" stroke="#145371"/>
+            <path d="M500 160 C385 160 365 130 167 160" stroke="#185c47"/>
+            <path d="M500 160 C630 160 640 192 834 160" stroke="#794814"/>
+            <path d="M500 160 C500 205 547 223 500 270" stroke="#52628b"/>
+          </svg>
+          <div class="mind-root">
+            <svg width="30" height="33" viewBox="0 0 30 33" aria-hidden="true"><path d="M5 2H19L25 8V31H5Z M19 2V9H25 M9 21L13 25L21 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <strong>资料审核</strong>
+          </div>
+          <ul class="mind-branches" role="list">
+            <li><a href="#requirements"><strong>范围</strong><span>角色 · 用途</span></a></li>
+            <li><a href="#boundary"><strong>证据</strong><span>资料版本 · 回执</span></a></li>
+            <li><a href="#review"><strong>操作</strong><span>预览 · 确认 · 重试</span></a></li>
+            <li><a href="#implementation"><strong>实施</strong><span>契约 · 验收</span></a></li>
+          </ul>
+        </div>
+        <figcaption id="map-caption">从中心发散出关联线索，四条主枝可跳到正文。狭屏上的分支会纵向排列。</figcaption>
+      </figure>
+    </section>
+
+    <section id="briefing" aria-labelledby="briefing-title">
+      <h2 id="briefing-title">汇报提纲 · 金字塔</h2>
+      <figure aria-labelledby="briefing-caption">
+        <div class="reason-chart pyramid">
+          <div class="reason-root"><strong>先交付可追溯的单页审核闭环，再评估批量审核。</strong></div>
+          <ul class="reason-branches">
+            <li><strong>来源可核对</strong><a href="#concept-map">依据 · 版本、物理页和记录的关联</a></li>
+            <li><strong>完成可确认</strong><a href="#review">依据 · 用保存回执确认完成</a></li>
+            <li><strong>失败可恢复</strong><a href="#failure-tree">依据 · 保留草稿，按出错环节排查</a></li>
+          </ul>
+        </div>
+        <figcaption id="briefing-caption">样例的首期建议。先读顶层结论，再顺着三个理由查依据和验收条件。</figcaption>
+      </figure>
+    </section>
+    <section id="requirements" aria-labelledby="requirements-title">
+      <h2 id="requirements-title">目标与功能范围</h2>
+      <p>要解决的问题是审核结论容易和原资料页分开，回头找不到依据。资料维护人员提供原件及版本，审核员核对候选页、确认后保存。完成记录能查到原资料、物理页、审核人和回执。</p>
+      <dl class="feature-list">
+        <div><dt>预览候选页</dt><dd>审核员从待核记录打开指定页，核对标题和物理页码。</dd></div>
+        <div><dt>确认并保存</dt><dd>审核员确认候选页后提交，页面以服务端回执更新完成状态。</dd></div>
+        <div><dt>失败后继续</dt><dd>保存失败时保留本页草稿，恢复连接后可重试。</dd></div>
+      </dl>
+      <p class="note">本期验证单条审核链路。批量处理与跨设备草稿恢复待定。</p>
+    </section>
+
+    <section id="design-dialogue" aria-labelledby="dialogue-title">
+      <h2 id="dialogue-title">研究、选项与风险</h2>
+      <figure class="engineering-demo" aria-labelledby="explore-title">
+        <h3 id="explore-title">从问题出发 · 断网后怎样继续核对？</h3>
+        <p class="hint">同一场景为审核员已核对候选页、保存前失去连接。下图与操作均为方案推演。</p>
+        <div class="reason-chart choice-chart">
+          <div class="reason-root"><strong>让审核员恢复网络后接着做</strong></div>
+          <ul class="reason-branches">
+            <li><strong>A · 保留当前页面草稿</strong><span>同页可重试。刷新后需重新核对。验证点是断网时的草稿与状态。</span></li>
+            <li><strong>B · 增加浏览器草稿</strong><span>同浏览器刷新后有机会恢复。需验证写入成功、资料版本一致及清理规则。</span></li>
+          </ul>
+        </div>
+        <div class="demo-columns">
+          <div class="demo-pane">
+            <h4>用同一场景比较</h4>
+            <label>试用方案 <select id="explore-option"><option value="page">A · 当前页面</option><option value="browser">B · 浏览器草稿</option></select></label>
+            <label>发生的事 <select id="explore-event"><option value="disconnect">断网后留在本页</option><option value="reload">断网后刷新</option></select></label>
+          </div>
+          <div class="demo-pane">
+            <h4>审核员会看到什么</h4>
+            <p id="explore-result" class="notice" role="status">本页草稿仍在，恢复连接后可继续提交。</p>
+          </div>
+        </div>
+        <div class="decision-note">
+          <strong>示例决策 D-01 · 已确认</strong>
+          <p>首期验收只要求同页断网重试，因此采用 A。若刷新后恢复成为验收要求，再验证 B。<a href="#accept">查看断网验收</a></p>
+        </div>
+        <figcaption>切换的是试用情景。D-01 代表示例中经过对话确认的决定。</figcaption>
+      </figure>
+
+      <figure class="engineering-demo" id="receipt-risk" aria-labelledby="direction-title">
+        <h3 id="direction-title">方向已定 · 收到保存回执才继续下一项</h3>
+        <p>重点核验服务端已经保存、回执却没有到达的情况。客户端此时无法判断写入结果。</p>
+        <div class="reason-chart choice-chart">
+          <div class="reason-root"><strong>审核服务完成写入</strong></div>
+          <ul class="reason-branches">
+            <li id="risk-received" data-current="true"><strong>回执已到</strong><span>记录已经确认保存，可以进入下一项。</span></li>
+            <li id="risk-missing" data-current="false"><strong>回执未到</strong><span>停在本项，保留草稿并查询结果。用同一提交标识重试，须先验证服务端能复用原记录。</span></li>
+          </ul>
+        </div>
+        <div class="demo-columns">
+          <div class="demo-pane"><h4>模拟网络结果</h4><label>回执状态 <select id="risk-receipt"><option value="received">已收到</option><option value="missing">写入后未收到</option></select></label></div>
+          <div class="demo-pane"><h4>客户端下一步</h4><p id="risk-result" class="notice" role="status">收到保存回执，显示已完成并可继续。</p></div>
+        </div>
+        <figcaption>待验证的风险是重试会不会写成两条记录。联调时让第一次写入成功而回执丢失，再按原提交标识重试，核对记录库仍只有一条。<a href="#failure-tree">查看失败排查</a></figcaption>
+      </figure>
+    </section>
+    <section id="boundary" aria-labelledby="boundary-title"><h2 id="boundary-title">系统边界与数据流</h2><figure class="d2-figure" aria-labelledby="sample-figure" data-diagram="sample">
+          <h3 id="sample-figure">从选页到审核回执</h3>
+          <div class="d2-frame">
+            <div class="d2-tools">
+        <span>系统图示</span>
+        <div class="d2-controls" role="group" aria-label="图示缩放" aria-controls="d2-sample-view" hidden>
+          <div class="d2-stepper">
+            <button type="button" class="d2-decrease" aria-label="缩小图示">−</button>
+            <input type="range" class="d2-range" min="10" max="400" step="1" value="100" aria-label="缩放比例（适应宽度为 100%）">
+            <span class="d2-percent" aria-hidden="true">100%</span>
+            <button type="button" class="d2-increase" aria-label="放大图示">+</button>
+          </div>
+          <div class="d2-presets">
+            <button type="button" class="d2-fit-width">适应宽度</button>
+            <button type="button" class="d2-fit-whole">显示全图</button>
+          </div>
+        </div>
+      </div>
+            <div class="d2-view" id="d2-sample-view" role="region" tabindex="0" aria-label="从选页到审核回执">
+              <img width="930" height="300" alt="审核端从资料源取原件，提交核对给审核服务。服务写入记录库并返回回执或失败原因。" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MzAgMzAwIj4KICA8dGl0bGU+6LWE5paZ5rqQ44CB5a6h5qC456uv44CB5a6h5qC45pyN5Yqh5ZKM6K6w5b2V5bqTPC90aXRsZT4KICA8ZGVmcz48bWFya2VyIGlkPSJhcnJvdyIgb3JpZW50PSJhdXRvIiBtYXJrZXJXaWR0aD0iNyIgbWFya2VySGVpZ2h0PSI2IiByZWZYPSI2IiByZWZZPSIzIj48cGF0aCBkPSJNMCAwTDcgM0wwIDZaIiBmaWxsPSIjMTQ1MzcxIi8+PC9tYXJrZXI+PC9kZWZzPgogIDxnIGZpbGw9IiNmMGY1ZjciIHN0cm9rZT0iIzE0NTM3MSI+CiAgICA8cmVjdCB4PSIzNSIgeT0iMzIiIHdpZHRoPSIyMjUiIGhlaWdodD0iNjQiLz4KICAgIDxyZWN0IHg9IjM1IiB5PSIxNjkiIHdpZHRoPSIyMjUiIGhlaWdodD0iNzciLz4KICAgIDxyZWN0IHg9IjM1MiIgeT0iMTY5IiB3aWR0aD0iMjI1IiBoZWlnaHQ9Ijc3Ii8+CiAgICA8cmVjdCB4PSI2NjkiIHk9IjE2OSIgd2lkdGg9IjIyNSIgaGVpZ2h0PSI3NyIvPgogIDwvZz4KICA8ZyBmb250LWZhbWlseT0iTWljcm9zb2Z0IFlhSGVpIFVJLCBQaW5nRmFuZyBTQywgc2Fucy1zZXJpZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzE2MjgzMiIgZm9udC1zaXplPSIxNiI+CiAgICA8dGV4dCB4PSIxNDgiIHk9IjU4Ij7otYTmlpnmupA8L3RleHQ+PHRleHQgeD0iMTQ4IiB5PSI4MSI+5Y6f5Lu25LiO54mI5pysPC90ZXh0PgogICAgPHRleHQgeD0iMTQ4IiB5PSIyMDIiPuWuoeaguOerrzwvdGV4dD48dGV4dCB4PSIxNDgiIHk9IjIyNiI+6aKE6KeI44CB5qC45a+544CB5L+d55WZ6I2J56i/PC90ZXh0PgogICAgPHRleHQgeD0iNDY1IiB5PSIyMDIiPuWuoeaguOacjeWKoTwvdGV4dD48dGV4dCB4PSI0NjUiIHk9IjIyNiI+5p2D6ZmQ5LiO54mI5pys5qCh6aqMPC90ZXh0PgogICAgPHRleHQgeD0iNzgxIiB5PSIyMDIiPuiusOW9leW6kzwvdGV4dD48dGV4dCB4PSI3ODEiIHk9IjIyNiI+5a6h5qC46K6w5b2V5LiO5p2l5rqQPC90ZXh0PgogICAgPHRleHQgeD0iMjA4IiB5PSIxMzQiPuaMieeJiOacrOWPluWOn+S7tjwvdGV4dD4KICAgIDx0ZXh0IHg9IjMwNiIgeT0iMTk4Ij7mj5DkuqTmoLjlr7k8L3RleHQ+PHRleHQgeD0iNjIzIiB5PSIxOTgiPuS/neWtmOiusOW9lTwvdGV4dD4KICAgIDx0ZXh0IHg9IjMwNiIgeT0iMjgzIj7lm57miafmiJbplJnor6/ljp/lm6A8L3RleHQ+CiAgPC9nPgogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE0NTM3MSIgc3Ryb2tlLXdpZHRoPSIyIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSI+CiAgICA8cGF0aCBkPSJNMTQ4IDk2VjE2OSIvPjxwYXRoIGQ9Ik0yNjAgMjA5SDM1MCIvPjxwYXRoIGQ9Ik01NzcgMjA5SDY2NyIvPgogICAgPHBhdGggZD0iTTQ2NSAyNDZWMjYzSDE0OFYyNDciIHN0cm9rZS1kYXNoYXJyYXk9IjYgNCIvPgogIDwvZz4KPC9zdmc+">
+            </div>
+            <details class="d2-source"><summary>查看 SVG 源码</summary><pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 930 300&quot;&gt;
+  &lt;title&gt;资料源、审核端、审核服务和记录库&lt;/title&gt;
+  &lt;defs&gt;&lt;marker id=&quot;arrow&quot; orient=&quot;auto&quot; markerWidth=&quot;7&quot; markerHeight=&quot;6&quot; refX=&quot;6&quot; refY=&quot;3&quot;&gt;&lt;path d=&quot;M0 0L7 3L0 6Z&quot; fill=&quot;#145371&quot;/&gt;&lt;/marker&gt;&lt;/defs&gt;
+  &lt;g fill=&quot;#f0f5f7&quot; stroke=&quot;#145371&quot;&gt;
+    &lt;rect x=&quot;35&quot; y=&quot;32&quot; width=&quot;225&quot; height=&quot;64&quot;/&gt;
+    &lt;rect x=&quot;35&quot; y=&quot;169&quot; width=&quot;225&quot; height=&quot;77&quot;/&gt;
+    &lt;rect x=&quot;352&quot; y=&quot;169&quot; width=&quot;225&quot; height=&quot;77&quot;/&gt;
+    &lt;rect x=&quot;669&quot; y=&quot;169&quot; width=&quot;225&quot; height=&quot;77&quot;/&gt;
+  &lt;/g&gt;
+  &lt;g font-family=&quot;Microsoft YaHei UI, PingFang SC, sans-serif&quot; text-anchor=&quot;middle&quot; fill=&quot;#162832&quot; font-size=&quot;16&quot;&gt;
+    &lt;text x=&quot;148&quot; y=&quot;58&quot;&gt;资料源&lt;/text&gt;&lt;text x=&quot;148&quot; y=&quot;81&quot;&gt;原件与版本&lt;/text&gt;
+    &lt;text x=&quot;148&quot; y=&quot;202&quot;&gt;审核端&lt;/text&gt;&lt;text x=&quot;148&quot; y=&quot;226&quot;&gt;预览、核对、保留草稿&lt;/text&gt;
+    &lt;text x=&quot;465&quot; y=&quot;202&quot;&gt;审核服务&lt;/text&gt;&lt;text x=&quot;465&quot; y=&quot;226&quot;&gt;权限与版本校验&lt;/text&gt;
+    &lt;text x=&quot;781&quot; y=&quot;202&quot;&gt;记录库&lt;/text&gt;&lt;text x=&quot;781&quot; y=&quot;226&quot;&gt;审核记录与来源&lt;/text&gt;
+    &lt;text x=&quot;208&quot; y=&quot;134&quot;&gt;按版本取原件&lt;/text&gt;
+    &lt;text x=&quot;306&quot; y=&quot;198&quot;&gt;提交核对&lt;/text&gt;&lt;text x=&quot;623&quot; y=&quot;198&quot;&gt;保存记录&lt;/text&gt;
+    &lt;text x=&quot;306&quot; y=&quot;283&quot;&gt;回执或错误原因&lt;/text&gt;
+  &lt;/g&gt;
+  &lt;g fill=&quot;none&quot; stroke=&quot;#145371&quot; stroke-width=&quot;2&quot; marker-end=&quot;url(#arrow)&quot;&gt;
+    &lt;path d=&quot;M148 96V169&quot;/&gt;&lt;path d=&quot;M260 209H350&quot;/&gt;&lt;path d=&quot;M577 209H667&quot;/&gt;
+    &lt;path d=&quot;M465 246V263H148V247&quot; stroke-dasharray=&quot;6 4&quot;/&gt;
+  &lt;/g&gt;
+&lt;/svg&gt;</code></pre></details>
+          </div>
+        </figure>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="组件职责与数据归属">
+        <table>
+          <thead><tr><th scope="col">层</th><th scope="col">职责与输入</th><th scope="col">关键输出或归属</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">审核端</th><td>预览源资料，记录用户确认。</td><td>持有待提交草稿。收到回执才更新完成状态。</td></tr>
+            <tr><th scope="row">审核服务</th><td>验证操作者、来源和资料版本，写审核记录。</td><td>返回保存回执或需要重试、重新核对的原因。</td></tr>
+            <tr><th scope="row">记录库</th><td>关联资料版本、物理页、审核人和结果。</td><td>保留审核记录供回执追溯。原资料继续由资料源管理。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <details class="contract"><summary>查看审核提交约定</summary>
+        <p>候选接口 <code>POST /reviews/{id}/confirm</code> 接收资料版本、原文件实际页号和核对结果。审核服务用登录身份关联审核人，返回审核记录标识。资料版本冲突时，审核员刷新后重新核对。</p>
+      </details>
+      <p class="note"><strong>工具与依赖</strong> 浏览器用 PDF.js 预览原文件是候选方案。提交按 HTTP/JSON 设计，客户端从浏览器网络面板核对请求和响应，服务端从版本校验与写入记录排查。记录库选型待定，样页的保存与回执为模拟。</p>
+      <figure id="concept-map" aria-labelledby="concept-title">
+        <h3 id="concept-title">概念图 · 回执怎样追到原资料？</h3>
+        <div class="relation-viewport" role="region" tabindex="0" aria-label="可滚动的资料追溯概念图">
+          <svg class="relation-map" viewBox="0 0 740 302" role="img" aria-labelledby="relation-title relation-description">
+            <title id="relation-title">审核回执与原资料的联系</title>
+            <desc id="relation-description">审核回执指向审核记录。审核记录绑定资料版本并记录物理页。资料版本限定物理页范围。</desc>
+            <defs><marker id="concept-arrow" orient="auto" markerWidth="7" markerHeight="6" refX="6" refY="3"><path d="M0 0L7 3L0 6Z" fill="#145371"/></marker></defs>
+            <g fill="#f0f5f7" stroke="#145371">
+              <rect x="245" y="22" width="250" height="48"/>
+              <rect x="245" y="126" width="250" height="48"/>
+              <rect x="45" y="232" width="240" height="48"/>
+              <rect x="455" y="232" width="240" height="48"/>
+            </g>
+            <g fill="none" stroke="#145371" stroke-width="2" marker-end="url(#concept-arrow)">
+              <path d="M370 70V124"/>
+              <path d="M300 174L177 230"/>
+              <path d="M445 174L563 230"/>
+              <path d="M285 256H453" stroke-dasharray="5 4"/>
+            </g>
+            <g fill="#162832" text-anchor="middle">
+              <text x="370" y="52">审核回执</text><text x="370" y="156">审核记录</text>
+              <text x="165" y="261">资料版本</text><text x="575" y="261">物理页</text>
+              <text x="395" y="105">指向</text><text x="228" y="200">绑定</text><text x="527" y="198">记录</text>
+              <text x="370" y="247">限定页码范围</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>虚线补上跨分支约束。物理页须在对应资料版本的页码范围内。</figcaption>
+        <details class="contract"><summary>逐条读图中关系</summary><p>审核回执指向审核记录。审核记录绑定资料版本并记录物理页。资料版本限定物理页的有效范围。</p></details>
+      </figure>
+    </section>
+
+    <section id="review" aria-labelledby="review-title">
+      <h2 id="review-title">操作与异常 · 确认资料页</h2>
+      <figure class="engineering-demo" aria-labelledby="review-example">
+        <h3 id="review-example">核对标题后保存</h3>
+        <div class="demo-columns">
+          <div class="demo-pane">
+            <h4>审核员 · 预览与确认</h4>
+            <div class="demo-slice"><strong>PDF 第 6 页</strong><p>本页标题为「第二节 资料来源」。</p></div>
+            <label><input type="checkbox" id="sample-confirmed">我已核对标题和物理页</label>
+          </div>
+          <div class="demo-pane">
+            <h4>审核服务 · 模拟响应</h4>
+            <label>模拟保存结果 <select id="sample-outcome"><option value="ok">保存成功</option><option value="offline">连接中断</option></select></label>
+            <button id="sample-save" type="button" disabled>尝试保存</button>
+            <p id="sample-state" class="notice" role="status">待核对。保留页码候选供下次复核。</p>
+          </div>
+        </div>
+        <figcaption>可先选「连接中断」验证草稿保留，再切回「保存成功」重试。</figcaption>
+      </figure>
+    </section>
+    <section id="implementation" aria-labelledby="implementation-title">
+      <h2 id="implementation-title">实施顺序与依赖</h2>
+      <ol class="build-order">
+        <li><strong>先定审核契约</strong><p>确认物理页编号、资料版本、记录标识、回执和冲突响应。</p></li>
+        <li><strong>实现端到端保存</strong><p>上一步确认后接通预览、审核服务和记录库，能从回执追到已保存的审核记录。</p></li>
+        <li><strong>联调失败恢复</strong><p>有可复查的保存链路后，再跑断网、重试和过期草稿，按下方场景验收。</p></li>
+      </ol>
+      <figure id="failure-tree" aria-labelledby="failure-title">
+        <h3 id="failure-title">逻辑树 · 为什么页面还没显示审核完成？</h3>
+        <div class="reason-chart">
+          <div class="reason-root"><strong>按未完成发生的环节排查</strong></div>
+          <ul class="reason-branches">
+            <li><strong>请求未送达</strong><span>查页面确认状态与本次请求记录。用断网场景验证草稿保留。</span></li>
+            <li><strong>请求送达但写入失败</strong><span>查失败响应及写入记录。用版本冲突场景验证重新核对。</span></li>
+            <li><strong>已保存但页面未更新</strong><span>查记录库与回执，再核对界面状态。用已写入而回执未到的场景验证。</span></li>
+          </ul>
+        </div>
+        <figcaption>先确定故障落在哪一段，再按分支取证。回执未到的真实恢复策略待定。</figcaption>
+      </figure>
+    </section>
+    <section id="accept" aria-labelledby="accept-title">
+      <h2 id="accept-title">验收条件</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="验收条件">
+        <table>
+          <thead><tr><th scope="col">场景</th><th scope="col">操作</th><th scope="col">通过条件</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">候选页相符</th><td>预览后确认，收到保存回执。</td><td>状态完成，回执可定位到资料版本、物理页和审核记录。</td></tr>
+            <tr><th scope="row">保存失败</th><td>断开连接后尝试保存，再恢复连接重试。</td><td>首次错误可见且草稿仍可编辑，恢复后可按原页提交。</td></tr>
+            <tr><th scope="row">资料版本已更新</th><td>保留旧版本草稿，同时在服务端替换资料版本。</td><td>收到需要重新核对的提示，打开新版本后再提交。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">这些是方案验收条件。样页演示本地交互和讲解顺序。</p>
+    </section>
+  </main>
+<script>
+document.querySelectorAll(".d2-controls").forEach(controls => {
+    const viewport = document.getElementById(controls.getAttribute("aria-controls"));
+    const image = viewport.querySelector("img");
+    const range = controls.querySelector(".d2-range");
+    const percentage = controls.querySelector(".d2-percent");
+    const decrease = controls.querySelector(".d2-decrease");
+    const increase = controls.querySelector(".d2-increase");
+    const minimum = Number(range.min);
+    const maximum = Number(range.max);
+    const imageWidth = Number(image.getAttribute("width"));
+    const aspectHeight = Number(image.getAttribute("height")) / imageWidth;
+    const fitLimit = parseFloat(getComputedStyle(viewport).getPropertyValue("--d2-fit-limit"));
+    let scale = 100;
+    let showWhole = false;
+
+    function render() {
+      const fitWidth = Math.min(viewport.clientWidth, fitLimit, imageWidth);
+      if (showWhole) {
+        const heightLimit = parseFloat(getComputedStyle(viewport).maxHeight);
+        if (Number.isFinite(heightLimit)) {
+          const wholeScale = Math.floor(heightLimit / (fitWidth * aspectHeight) * 100);
+          scale = Math.max(minimum, Math.min(100, wholeScale));
+        }
+      }
+      image.style.width = Math.floor(fitWidth * scale / 100) + "px";
+      range.value = String(scale);
+      range.setAttribute("aria-valuetext", scale + "%");
+      percentage.textContent = scale + "%";
+      decrease.disabled = scale <= minimum;
+      increase.disabled = scale >= maximum;
+    }
+
+    function zoom(nextScale) {
+      const pane = viewport.getBoundingClientRect();
+      const before = image.getBoundingClientRect();
+      const centerX = pane.left + viewport.clientWidth / 2;
+      const centerY = pane.top + viewport.clientHeight / 2;
+      const fractionX = (centerX - before.left) / before.width;
+      const fractionY = (centerY - before.top) / before.height;
+      showWhole = false;
+      scale = Math.max(minimum, Math.min(maximum, nextScale));
+      render();
+      const after = image.getBoundingClientRect();
+      const updatedPane = viewport.getBoundingClientRect();
+      viewport.scrollLeft += after.left + after.width * fractionX - updatedPane.left - viewport.clientWidth / 2;
+      viewport.scrollTop += after.top + after.height * fractionY - updatedPane.top - viewport.clientHeight / 2;
+    }
+
+    function fit(whole) {
+      showWhole = whole;
+      scale = 100;
+      render();
+      viewport.scrollTo(0, 0);
+    }
+
+    viewport.classList.add("adjustable");
+    controls.hidden = false;
+    render();
+
+    range.addEventListener("input", () => zoom(Number(range.value)));
+    decrease.addEventListener("click", () => zoom(scale - 10));
+    increase.addEventListener("click", () => zoom(scale + 10));
+    controls.querySelector(".d2-fit-width").addEventListener("click", () => fit(false));
+    controls.querySelector(".d2-fit-whole").addEventListener("click", () => fit(true));
+    window.addEventListener("resize", render);
+  });
+
+  const chapterNav = document.querySelector(".engineering-nav");
+  const guideStart = document.getElementById("guide-start");
+  const guideBar = document.getElementById("guide-bar");
+  const guideStep = document.getElementById("guide-step");
+  const guidePrev = document.getElementById("guide-prev");
+  const guideNext = document.getElementById("guide-next");
+  const route = [
+    ["briefing", "为何先做单页审核闭环"],
+    ["requirements", "本期要完成的审核结果"],
+    ["design-dialogue", "为何选择同页重试，以及回执丢失怎么办"],
+    ["boundary", "谁负责预览、校验与保存"],
+    ["review", "审核员怎样操作和重试"],
+    ["implementation", "哪些工作要先完成"],
+    ["accept", "怎样证明方案可用"]
+  ];
+  let currentStep = 0;
+
+  function measureNav() {
+    document.documentElement.style.setProperty("--guide-nav-height", chapterNav.offsetHeight + "px");
+  }
+
+  function syncStep() {
+    guideStep.textContent = (currentStep + 1) + " / " + route.length + " · " + route[currentStep][1];
+    guidePrev.disabled = currentStep === 0;
+    guideNext.disabled = currentStep === route.length - 1;
+  }
+
+  function visitStep(index) {
+    currentStep = index;
+    syncStep();
+    const id = route[index][0];
+    if (location.hash !== "#" + id) location.hash = id;
+    else document.getElementById(id).scrollIntoView();
+  }
+
+  guideStart.hidden = false;
+  guideStart.addEventListener("click", () => {
+    guideBar.hidden = false;
+    guideStart.setAttribute("aria-expanded", "true");
+    measureNav();
+    visitStep(0);
+    guideNext.focus({ preventScroll: true });
+  });
+  guidePrev.addEventListener("click", () => visitStep(currentStep - 1));
+  guideNext.addEventListener("click", () => visitStep(currentStep + 1));
+  document.getElementById("guide-exit").addEventListener("click", () => {
+    guideBar.hidden = true;
+    guideStart.setAttribute("aria-expanded", "false");
+    measureNav();
+    guideStart.focus({ preventScroll: true });
+  });
+  window.addEventListener("hashchange", () => {
+    const destination = document.getElementById(location.hash.slice(1));
+    const section = destination?.closest("section");
+    const next = route.findIndex(([id]) => id === section?.id);
+    if (!guideBar.hidden && next >= 0) {
+      currentStep = next;
+      syncStep();
+    }
+  });
+  new ResizeObserver(measureNav).observe(chapterNav);
+  measureNav();
+
+  const confirmed = document.getElementById("sample-confirmed");
+  const outcome = document.getElementById("sample-outcome");
+  const save = document.getElementById("sample-save");
+  const state = document.getElementById("sample-state");
+
+  function showDraft() {
+    save.disabled = !confirmed.checked;
+    state.textContent = confirmed.checked ? "页码已核对，可尝试保存。" : "待核对。保留页码候选供下次复核。";
+  }
+
+  confirmed.addEventListener("change", showDraft);
+  save.addEventListener("click", () => {
+    state.textContent = outcome.value === "ok" ? "已保存（示例回执 R-001）。" : "连接中断。本页已核对信息保留，可以重试。";
+  });
+  showDraft();
+
+  const exploreOption = document.getElementById("explore-option");
+  const exploreEvent = document.getElementById("explore-event");
+  const exploreResult = document.getElementById("explore-result");
+  function compareRecovery() {
+    if (exploreEvent.value === "disconnect") {
+      exploreResult.textContent = "本页草稿仍在，恢复连接后可继续提交。";
+    } else {
+      exploreResult.textContent = exploreOption.value === "page"
+        ? "刷新后本页草稿消失，须重新核对候选页。"
+        : "若已成功保存浏览器草稿且资料版本一致，可恢复本次核对。需同浏览器复测。";
+    }
+  }
+  exploreOption.addEventListener("change", compareRecovery);
+  exploreEvent.addEventListener("change", compareRecovery);
+
+  const riskReceipt = document.getElementById("risk-receipt");
+  riskReceipt.addEventListener("change", () => {
+    const received = riskReceipt.value === "received";
+    document.getElementById("risk-received").dataset.current = String(received);
+    document.getElementById("risk-missing").dataset.current = String(!received);
+    document.getElementById("risk-result").textContent = received
+      ? "收到保存回执，显示已完成并可继续。"
+      : "保存结果待确认。留在本项并保留草稿，待查询或按原提交标识重试。";
+  });
+</script></body></html>
